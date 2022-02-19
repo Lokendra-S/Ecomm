@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('partials/Header'); %>
+<body>
+    <div class="container-fluid">
+        <%- include('partials/Navbar'); %>
+        <div class="cartContainer mx-4 my-5">
+            <div class="cartHeader">
+                <p class="fw-bold fs-2">Cart</p>
+                <hr class="my-0">
+            </div>
+            <div class="cartBody">
+                <div class="cartItems my-3" data-uid="<%= user ? user._id : null %>">
+                </div>
+                <div class="totalButtons">
+                    <div class="buttonContainer me-5 d-flex flex-column gap-4 justify-content-end">
+                        <div class="subTotal me-5 d-flex gap-4 justify-content-end">
+                            <a class="subTotalButton px-5 py-2 text-center btn btn-dark text-uppercase fs-5">subtotal</a>
+                            <p class="fw-normal my-0 fs-5">Rs.<span class="fw-bold fs-2">400</span>.00</p>
+                        </div>
+                        <div class="checkOut me-5 d-flex gap-4 justify-content-end align-items-end">
+                            <a href="" class="checkOutButton w-25 px-5 py-2 text-center btn btn-danger text-uppercase fs-4">checkout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%- include('partials/Footer'); %>
+    <script>
+        window.onload = async () => {
+
+        var cartItems = document.querySelector('.cartItems')
+        var cartUser = cartItems.dataset.uid
+        const cartRes = await fetch('/getProductArr', {
+            method: 'POST',
+            body: JSON.stringify({ _id: cartUser }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        const cartArray = await cartRes.json()
+        await cartArray.tempArray.forEach((e) => {
+            cartItems.innerHTML += `
+            <div class="cartItem my-3 row py-3 px-2" data-uid = "<%= user ? user._id : null %>" data-id=${e.productId}>
+                <div class="cartItemDetails col-1 d-flex gap-3">
+                    <div class="cartItemImageContainer col-12">
+                        <img class="cartItemImage" src=${e.productImg} alt="">
+                    </div>
+                </div>
+                <div class="cartItemBody col-11 d-flex">
+                    <div class="cartItemName col-8">
+                        <div class="cartItemName col-12">
+                            <p class="fw-bold productName fs-4 my-0">${e.productTitle}</p>
+                            <p class="fw-normal fs-6">Rs.<span class="fs-3 fw-bold">${e.productPrice}</span></p>
+                        </div>
+                    </div>
+                    <div class="cartItemPrice d-flex justify-content-center align-items-center col-4">
+                        <div class="quantityButtons col-6">
+                            <input class="px-2 py-0 fs-5 decButton" type="button" value="-">
+                            <input class="px-2 py-0 fs-5 quantityNumber" type="button" value="${e.quantity}">
+                            <input class="px-2 py-0 fs-5 incButton" type="button" value="+">
+                        </div>
+                        <div class="totlProductPrice col-6">
+                            <p class="fw-normal fs-5">Rs.<span class="fw-bold fs-2">${e.subTotal.toFixed(2)}</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            `
+        })
+        //Quantity Inc and Dec
+
+        var incButton = document.querySelectorAll('.incButton')
+        var decButton = document.querySelectorAll('.decButton')
+        var quantityNumber = document.querySelectorAll('.quantityNumber')
+        var cartItem = document.querySelectorAll('.cartItem')
+
+        for (let i = 0; i < incButton.length; i++) {
+            incButton[i].addEventListener('click',async(e) => { 
+                if ((quantityNumber[i].value) >= 1){
+                    quantityNumber[i].value = parseInt(quantityNumber[i].value) + 1
+                    const cartRes = await fetch('/IncQuan', {
+                        method: 'POST',
+                        body: JSON.stringify({ 
+                            "_id": cartItem[i].dataset.uid,
+                            "id": cartItem[i].dataset.id,
+                            "quantity":quantityNumber[i].value 
+                        }),
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    });
+                    const cartResult = await cartRes.json()
+                    window.location.reload()
+                }
+            })
+        }
+        for (let i = 0; i < decButton.length; i++) {
+            decButton[i].addEventListener('click',async(e) => { 
+                if ((quantityNumber[i].value) > 1){
+                    quantityNumber[i].value = parseInt(quantityNumber[i].value) - 1
+                    const cartRes = await fetch('/IncQuan', {
+                        method: 'POST',
+                        body: JSON.stringify({ 
+                            "_id": cartItem[i].dataset.uid,
+                            "id": cartItem[i].dataset.id,
+                            "quantity":quantityNumber[i].value 
+                        }),
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    });
+                    const cartResult = await cartRes.json()
+                    window.location.reload()
+                }
+            })
+        }
+        // decButton.addEventListener('click',() => {
+        //     if (quantityNumber.value > 1){
+        //         quantityNumber.value = parseInt(quantityNumber.value) - 1
+        //     }
+        // })
+    }
+    </script>
+</body>
+</html>

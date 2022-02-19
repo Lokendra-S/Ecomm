@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('partials/Header'); %>
+<body>
+    <div class="container-fluid">
+        <%- include('partials/Navbar'); %>
+        <% if (productData) { %>
+            <div class="singleProductContainer my-5 mx-4" data-uid="<%= user ? user._id : null %>" data-id="<%= productData._id %>">
+                <div class="row">
+                    <div class="col-6 singleProductImageContainer mx-auto" >
+                        <div class="singleImage mx-auto d-flex justify-content-center align-items-center">
+                            <img class="singleProductImage " src="<%= productData.ProductImage %> " alt="">
+                        </div>
+                        <!-- <div class="col-12 mt-3 d-flex gap-4 justify-content-center multipleImages">
+                            <div class="col-2">
+                                <img class="singleProductImage singleProductImageSm" src="/ASSETS/Portrait young handsome man posing.png" alt="">
+                            </div>
+                            <div class="col-2">
+                                <img class="singleProductImage singleProductImageSm" src="/ASSETS/Portrait young handsome man posing.png" alt="">
+                            </div>
+                            <div class="col-2">
+                                <img class="singleProductImage singleProductImageSm" src="/ASSETS/Portrait young handsome man posing.png" alt="">
+                            </div>
+                            <div class="col-2">
+                                <img class="singleProductImage singleProductImageSm" src="/ASSETS/Portrait young handsome man posing.png" alt="">
+                            </div>
+                            <div class="col-2">
+                                <img class="singleProductImage" src="/ASSETS/Portrait young handsome man posing.png" alt="">
+                            </div>
+                        </div> -->
+                    </div>
+                    <div class="col-6 singleProductDetailsContainer">
+                        <div class="productHeader">
+                            <h1 class="fw-normal fs-2"><%= productData.ProductTitle %></h1>
+                            <h5 class="fw-normal"><%= productData.ProductCategory %></h5>
+                            <div class="d-flex justify-content-start align-items-center gap-2 mt-4 ratingContainer">
+                                <div class="ratings">
+                                    <span class="ratingIconContainer text-center">
+                                        <i class="ratingIcon ri-star-fill ri-xl"></i>
+                                    </span>
+                                    <span class="ratingIconContainer text-center">
+                                        <i class="ratingIcon ri-star-fill ri-xl"></i>
+                                    </span>
+                                    <span class="ratingIconContainer text-center">
+                                        <i class="ratingIcon ri-star-fill ri-xl"></i>
+                                    </span>
+                                    <span class="ratingIconContainer text-center">
+                                        <i class="ratingIcon ri-star-half-fill ri-xl"></i>
+                                    </span>
+                                    <span class="ratingIconContainer text-center">
+                                        <i class="ratingIcon ri-star-line ri-xl"></i>
+                                    </span>
+                                </div>
+                                <h6 class="fw-normal"> From <%= productData.ProductRatingCount %> ratings</h6>
+                            </div>
+                        </div>
+                        <div class="productPrice mt-5">
+                            <h1 class="fw-light fs-4">Rs.<span class="fs-1 fw-bold"><%= productData.ProductPrice %></span></h1>
+                            <p class="fw-light my-0 py-0 fs-5 text-decoration-line-through"><%= productData.ProductOriginalPrice %></p>
+                            <p class="fw-normal discountOption mt-0 pt-0 fs-5 "></p>
+                        </div>
+                        <div class="quantityAndButtons">
+                            <div class="quantity my-5 d-flex justify-content-start align-items-center gap-3">
+                                <p class="fw-normal my-0 fs-5">Quantity:</p>
+                                <div class="quantityButtons">
+                                    <input class="px-2 decButton" type="button" value="-">
+                                    <input class="px-2 quantityNumber" type="button" value="1">
+                                    <input class="px-2 incButton" type="button" value="+">
+                                </div>
+                            </div>
+                            <div class="buttonContainer d-flex justify-content-center align-items-center gap-4">
+                                <button type="button" class="btn btn-dark py-2 addCart fs-5">Add to cart</button>
+                                <button type="button" class="btn btn-danger py-2 fs-5">Buy Now</button>
+                            </div>
+                        </div>
+                        <div class="aboutThisProduct">
+                            <p class="fw-bold fs-3 my-4">About</p>
+                            <p class="fw-normal fs-5 productDesc"><%= productData.ProductDescription %></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="reviewsContainer mt-5">
+                    <div class="reviewheader d-flex justify-content-between align-items-center">
+                        <p class="fw-normal fs-3">Reviews</p>
+                        <p class="fw-normal fs-5"><%= productData.ProductRating %> out of <%= productData.ProductRatingCount %> reviews</p>
+                    </div>
+                    <hr class="my-0">
+                    <div class="reviews mt-3">
+                        <div class="review px-3 py-2">
+                            <div class="userContainer mt-4 gap-3 d-flex justify-content-start align-items-start">
+                                <div class="userProfileImageContainer">
+                                    <img class="userProfileImage" src="/ASSETS/Isolated_black_t-shirt_front.jpg" alt="">
+                                </div>
+                                <div class="userDetails ">
+                                    <p class="fw-normal fs-5 my-0">Lokendra.S</p>
+                                    <p class="fw-normal fs-6 my-0">CreatedAt : 12-12-12</p>
+                                </div>
+                            </div>
+                            <div class="reviewText mt-3">
+                                <p class="fw-normal fs-6">
+                                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Exercitationem voluptatem iure temporibus earum blanditiis mollitia deserunt iusto aliquam necessitatibus quis eligendi repudiandae officia hic perferendis incidunt, placeat sunt totam culpa quod quibusdam sequi corporis itaque. Consectetur voluptate illo, nisi libero iusto dolor distinctio, amet quia ipsum blanditiis quis saepe dignissimos iure! Consequatur nobis quidem fuga ratione libero quod distinctio quis, aspernatur atque illum blanditiis corrupti non aperiam et natus molestias.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% } %>
+    </div>
+    <%- include ('partials/Modal') %> 
+    <%- include('partials/Footer'); %>
+    <script>
+        var discount = document.querySelector('.discountOption')
+        var count = '<%= productData.ProductPrice %>';
+        var dis = '<%= productData.ProductOriginalPrice%>'
+        var fixedValue = (dis - count).toFixed(2)
+        discount.innerHTML = `You save ${fixedValue}`
+
+
+        //Quantity Inc and Dec
+
+        var incButton = document.querySelector('.incButton')
+        var decButton = document.querySelector('.decButton')
+        var quantityNumber = document.querySelector('.quantityNumber')
+        incButton.addEventListener('click',(e) => {
+            if ((quantityNumber.value) >= 1){
+                quantityNumber.value = parseInt(quantityNumber.value) + 1
+            }
+        })
+        decButton.addEventListener('click',() => {
+            if (quantityNumber.value > 1){
+                quantityNumber.value = parseInt(quantityNumber.value) - 1
+            }
+        })
+
+
+        var singleProductContainer = document.querySelector('.singleProductContainer')
+        var uid = singleProductContainer.dataset.uid
+        var id = singleProductContainer.dataset.id
+        var modalText = document.querySelector('.modalText')
+        var addCart = document.querySelector('.addCart')
+        var btnRedirect = document.querySelector('.btnRedirect')
+        addCart.addEventListener('click',async(e) => {
+            const cartRes = await fetch('/addToCart', {
+                method: 'POST',
+                body: JSON.stringify({ "_id": uid,"id":id,"quan":quantityNumber.value }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            const cartResult = await cartRes.json()
+            console.log(cartResult)
+            if (cartResult.err === null){
+                e.target.setAttribute("data-bs-toggle","modal")
+                e.target.setAttribute("data-bs-target","#staticBackdrop")
+                modalText.innerHTML = 'Product is already available in cart'
+                btnRedirect.style.display = 'none'
+                btnRedirect.style.width = '50%'
+            }else{
+                e.target.setAttribute("data-bs-toggle","modal")
+                e.target.setAttribute("data-bs-target","#staticBackdrop")
+                modalText.innerHTML = 'Added to Cart Successfully'
+                btnRedirect.style.display = 'none'
+            }
+        })
+    </script>
+</body>
+</html>

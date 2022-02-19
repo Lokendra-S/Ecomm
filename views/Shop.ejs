@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('partials/Header'); %>
+<body>
+    <div class="container-fluid">
+      <%- include('partials/Navbar'); %>
+        <div class="shopProductsContainer col-12">
+            <div class="filtering d-flex flex-row justify-content-end align-items-end">
+                <select name="sort" class="selectFilter fs-5" id="sort">
+                    <option value="byPriceDescending">sort by</option>
+                    <option value="byPriceDescending">Price low to high</option>
+                    <option value="byPriceAscending">Price high to low</option>
+                    <option value="byPopularity">Popularity</option>
+                    <option value="byRelevence">Relevence</option>
+                </select>
+            </div>
+            <div class="products mt-4">
+                <% products.forEach(ele => { %>
+                  <div class="card productCard" id="aa">
+                    <div class="images" data-id="<%= ele._id %>" 
+                      data-name="<%= ele.ProductTitle %>"
+                    >
+                      <img src=<%= ele.ProductImage %>  class="card-img-top cardImage" alt="...">
+                    </div>
+                    <div class="wish">
+                      <p class="fw-bold fs-4 py-3 text-danger px-2 wishButton bg-light d-flex justify-content-center align-items-center">
+                        <i class="ri-heart-line ri-xl"></i>
+                      </p>
+                    </div>
+                    <div class="card-body">
+                      <h5 class="card-title"><%= ele.ProductTitle %> </h5>
+                      <p class="card-text productDescription mb-1"><%= ele.ProductDescription %> </p>
+                      <div class="princeContainer d-flex flex-row a mb-0">
+                        <h4 class="card-text sellingPrice mb-0">Rs.<%= ele.ProductPrice %></h4>
+                        <p class="card-text discountPrice ms-2 mt-auto"><%= ele.ProductOriginalPrice %></p>
+                      </div>
+                      <div class="buttonContainer d-flex flex-row justify-content-center gap-2">
+                        <a href="#" data-id = '<%= ele._id %>' data-user='<%= user ? user._id : null %>'  class="btn btn-dark cartButton mt-4" >Add to cart</a>
+                        <a href="#" class="btn btn-danger mt-4">Buy now</a>
+                      </div>
+                    </div>
+                  </div>
+                <% }) %>
+            </div>
+            <div class="buttonContainer mt-5 d-flex justify-content-between">
+                <a href="#" class="btn btn-dark prevButton">Previous</a>
+                <a href="#" class="btn btn-dark nextButton">Next</a>
+            </div>
+        </div>
+    </div>
+    <%- include('partials/Modal'); %>
+  </div>
+  <%- include('partials/Footer'); %>
+  <script>
+    var ProductsList = document.querySelectorAll('.productCard')
+    var images = document.querySelectorAll('.images')
+    images.forEach((ele) => {
+        ele.addEventListener('click',(e => {
+            const id = e.currentTarget.dataset.id
+            const name = (e.currentTarget.dataset.name)
+            console.log(id,name)//`/shop-item/${id}/${name}`
+            window.location = `/${name}&${id}`
+        }))
+    })
+    //checkLogin
+    var modalText = document.querySelector('.modalText')
+    var btnRedirect = document.querySelector('.btnRedirect')
+    var cartBtn = document.querySelectorAll('.cartButton')
+    cartBtn.forEach(ele => {
+        ele.addEventListener('click',async(e)=>{
+            var id = e.target.dataset.id
+            var user = e.target.dataset.user.trim()
+            if (user !== null){
+              const res = await fetch('/addToCart', {
+                method: 'POST',
+                body: JSON.stringify({ _id: user,id:id }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+              })
+              const result = await res.json()
+              if (result.err === null){
+                e.target.setAttribute("data-bs-toggle","modal")
+                e.target.setAttribute("data-bs-target","#staticBackdrop")
+                modalText.innerHTML = 'Product is already available in cart'
+                btnRedirect.style.display = 'none'
+              }
+            }else{
+                e.target.setAttribute("data-bs-toggle","modal")
+                e.target.setAttribute("data-bs-target","#staticBackdrop")
+            }
+        })
+    })
+  </script>
+</body>
+</html>

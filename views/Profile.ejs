@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('partials/Header'); %>
+<body>
+    <div class="container-fluid">
+      <%- include('partials/Navbar'); %>
+        <div class="profileContainer mx-5 my-3">
+            <div class="profile d-flex flex-column justify-content-center align-items-center">
+                <div class="profileImage">
+                    <img src="/ASSETS/Portrait young handsome man posing.png" alt="">
+                </div>
+                <div class="profleInfo d-flex flex-column justify-content-center align-items-center">
+                    <p class="fw-bold my-0 fs-4">Username</p>
+                    <p class="fw-normal my-0 fs-5">Items bought : 2</p>
+                </div>
+            </div>
+            <hr class="my-1">
+            <div class="profileProductInfoContainer">
+                <div class="itemheader my-3 d-flex justify-content-between">
+                    <p class="fw-bold fs-3">Your Orders</p>
+                    <select name="sort" class="selectFilter fs-5 px-2 border border-dark" id="sort">
+                        <option value="byPriceDescending">sort by</option>
+                        <option value="byPriceDescending">Price low to high</option>
+                        <option value="byPriceAscending">Price high to low</option>
+                        <option value="byPopularity">Popularity</option>
+                        <option value="byRelevence">Relevence</option>
+                    </select>
+                </div>
+                <div class="profileProductsContainer row">
+                    <div class="profileProduts col-3">
+                        <div class="card">
+                            <img src="/ASSETS/Isolated_black_t-shirt_front.jpg" class="card-img-top cardImage" alt="...">
+                            <div class="card-body">
+                              <h5 class="card-title">Printed white t-shirt</h5>
+                              <p class="card-text productDescription mb-1">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Autem, tempora quos! Beatae perferendis facilis saepe illum accusantium iste amet vel molestiae, commodi, dolore et, aspernatur impedit praesentium officia culpa. Corporis corrupti voluptatem ea nobis natus! Omnis, dolorum porro. Minima, quod?</p>
+                              <div class="princeContainer d-flex flex-row a mb-0">
+                                <h4 class="card-text sellingPrice mb-0">Rs.400</h4>
+                                <p class="card-text discountPrice ms-2 mt-auto">600</p>
+                              </div>
+                              <div class="buttonContainer d-flex flex-row justify-content-center gap-2">
+                                <a href="#" class="btn btn-dark mt-4">Add toc cart</a>
+                                <a href="#" class="btn btn-danger mt-4">Buy now</a>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profileProduts col-3">
+                        <div class="card">
+                            <img src="/ASSETS/Isolated_black_t-shirt_front.jpg" class="card-img-top cardImage" alt="...">
+                            <div class="card-body">
+                              <h5 class="card-title">Printed white t-shirt</h5>
+                              <p class="card-text productDescription mb-1">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Autem, tempora quos! Beatae perferendis facilis saepe illum accusantium iste amet vel molestiae, commodi, dolore et, aspernatur impedit praesentium officia culpa. Corporis corrupti voluptatem ea nobis natus! Omnis, dolorum porro. Minima, quod?</p>
+                              <div class="princeContainer d-flex flex-row a mb-0">
+                                <h4 class="card-text sellingPrice mb-0">Rs.400</h4>
+                                <p class="card-text discountPrice ms-2 mt-auto">600</p>
+                              </div>
+                              <div class="buttonContainer d-flex flex-row justify-content-center gap-2">
+                                <a href="#" class="btn btn-dark mt-4">Add toc cart</a>
+                                <a href="#" class="btn btn-danger mt-4">Buy now</a>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profileProduts col-3">
+                        <div class="card">
+                            <img src="/ASSETS/Isolated_black_t-shirt_front.jpg" class="card-img-top cardImage" alt="...">
+                            <div class="card-body">
+                              <h5 class="card-title">Printed white t-shirt</h5>
+                              <p class="card-text productDescription mb-1">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Autem, tempora quos! Beatae perferendis facilis saepe illum accusantium iste amet vel molestiae, commodi, dolore et, aspernatur impedit praesentium officia culpa. Corporis corrupti voluptatem ea nobis natus! Omnis, dolorum porro. Minima, quod?</p>
+                              <div class="princeContainer d-flex flex-row a mb-0">
+                                <h4 class="card-text sellingPrice mb-0">Rs.400</h4>
+                                <p class="card-text discountPrice ms-2 mt-auto">600</p>
+                              </div>
+                              <div class="buttonContainer d-flex flex-row justify-content-center gap-2">
+                                <a href="#" class="btn btn-dark mt-4">Add toc cart</a>
+                                <a href="#" class="btn btn-danger mt-4">Buy now</a>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profileProduts col-3">
+                        <div class="card">
+                            <img src="/ASSETS/Isolated_black_t-shirt_front.jpg" class="card-img-top cardImage" alt="...">
+                            <div class="card-body">
+                              <h5 class="card-title">Printed white t-shirt</h5>
+                              <p class="card-text productDescription mb-1">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Autem, tempora quos! Beatae perferendis facilis saepe illum accusantium iste amet vel molestiae, commodi, dolore et, aspernatur impedit praesentium officia culpa. Corporis corrupti voluptatem ea nobis natus! Omnis, dolorum porro. Minima, quod?</p>
+                              <div class="princeContainer d-flex flex-row a mb-0">
+                                <h4 class="card-text sellingPrice mb-0">Rs.400</h4>
+                                <p class="card-text discountPrice ms-2 mt-auto">600</p>
+                              </div>
+                              <div class="buttonContainer d-flex flex-row justify-content-center gap-2">
+                                <a href="#" class="btn btn-dark mt-4">Add toc cart</a>
+                                <a href="#" class="btn btn-danger mt-4">Buy now</a>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%- include('partials/Footer'); %>
+</body>
+</html>

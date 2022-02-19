@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include ('partials/Header') %> 
+<link rel="stylesheet" href="/CSS/form.css">
+<body>
+    <%- include ('partials/NavBar') %> 
+    <div class="container-fluid formContainer signUp">
+        <form action="/signup" method="POST">
+            <div class="textContent d-flex justify-content-center align-items-center">
+                <p class="fw-bold text-center fs-5">Welcome to <br><span class="fs-2">Ecomm.</span></p>
+            </div>
+            <hr>
+            <div class="flexInput">
+                <div class="mb-3">
+                    <label for="name" class="form-label">First Name</label>
+                    <input type="text" class="form-control" name="firstName" placeholder="enter name">
+                </div>
+                <div class="mb-3">
+                    <label for="class" class="form-label">Last Name</label>
+                    <input type="text" class="form-control" name="lastName" placeholder="enter class">
+                </div>
+            </div>
+            <div class="flexInput">
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control" name="username" placeholder="enter username">
+                </div>
+                <div class="mb-3">
+                  <label for="email" class="form-label">Email address</label>
+                  <input type="email" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="example@gmail.com">
+                </div>
+            </div>
+            <div class="flexInput">
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="enter password">
+                </div>
+                <div class="mb-3">
+                    <label for="cpassword" class="form-label">Confirm Password</label>
+                    <input type="password" class="form-control" name="cpassword" id="exampleInputPassword1" placeholder="re-enter password">
+                </div>
+            </div>
+            <div class="btnInput d-flex justify-content-center align-items-center">
+                <button type="submit" class="btn w-50">Submit</button>
+            </div>
+            <p class="text-center">Have an account? <a href="/login">login here</a></p>
+        </form>
+    </div>
+</body>
+</html>

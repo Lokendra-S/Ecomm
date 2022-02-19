@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('partials/Header'); %>
+<body>
+    <div class="container-fluid">
+      <%- include('partials/Navbar'); %>
+        <div class="checkoutContainer row m-5">
+            <div class="addressContainer col-8">
+              <p class="fw-bold fs-3">Add Address</p>
+              <form>
+                <div class="headForm d-flex gap-3 my-2">
+                  <div class="formControl w-50">
+                    <label for="" class="form-label">First Name</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                  </div>
+                  <div class="formControl w-50">
+                    <label for="" class="form-label">Last Name</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                  </div>
+                </div>
+                <div class="formControl my-2">
+                  <label for="" class="form-label">Email address</label>
+                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                </div>
+                <div class="formControl my-2">
+                  <label for="" class="from-label">Add Address</label>
+                  <div class="form-floating">
+                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+                    <label for="floatingTextarea">Address</label>
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-dark w-25 mt-2 submitButton">Submit</button>
+              </form>
+            </div>
+            <div class="checkoutproductsContainer col-4">
+              <div class="productsContainer p-4">
+                <p class="fw-bolder fs-4 my-0 text-center">PRODUCTS</p>
+                <hr class="my-1">
+                <div class="productsCheckout" data-uid="<%= user ? user._id : null %>">
+                </div>
+                <hr class="my-2">
+                <div class="product d-flex justify-content-center align-items-center">
+                  <p class="productName fs-4 my-0 me-3 text-uppercase">SUBTOTAL
+                    <span class="mx-2">=</span>
+                  </p>
+                  <p class="fw-normal fs-5 my-0">Rs.<span class="fs-3">400</span>.00</p>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+    <%- include('partials/Footer'); %>
+    <script>
+      window.onload = async () => {
+        var productsCheckout = document.querySelector('.productsCheckout')
+        var cartUser = productsCheckout.dataset.uid
+        const cartRes = await fetch('/getProductArr', {
+          method: 'POST',
+          body: JSON.stringify({ _id: cartUser }),
+          headers: {
+              'Content-Type': 'application/json'
+          }
+        })
+      const cartArray = await cartRes.json()
+      await cartArray.tempArray.forEach((e) => {
+          productsCheckout.innerHTML += `
+          <div class="product d-flex justify-content-between align-items-center" data-id=${e.productId}>
+              <div class="productNameContainer ">
+                <p class="productName fs-5 my-0">${e.productTitle}</p>
+                <p class="productQuantity fs-6 my-0">Quantity : ${e.quantity}</p>
+              </div>
+              <p class="productPrice fw-normal fs-5 my-0">Rs.<span class="fs-3">${e.subTotal}</span></p>
+            </div>
+          `
+      })
+      }
+    </script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include ('partials/Header') %> 
+<link rel="stylesheet" href="/CSS/form.css">
+<body>
+  <%- include ('partials/NavBar') %>
+    <div class="container-fluid formContainer Login">
+        <form action="/login" method="POST" class="">
+            <div class="textContent d-flex justify-content-center align-items-center">
+              <p class="fw-bold text-center fs-5">Welcome to <br><span class="fs-2">Ecomm.</span></p>
+            </div>
+            <hr>
+            <% if ( success !== true) { %>
+              <div class="bg-danger rounded">
+                <p class="fs-5 p-2 text-light bg.danger"><%= message %> </p>
+              </div>
+            <% } %>
+            <div class="mb-3">
+              <label for="Username" class="form-label">Username</label>
+              <input type="text" class="form-control" name="username" required>
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" class="form-control" name="password" id="exampleInputPassword1" required>
+            </div>
+            <button type="submit" class="btn">Submit</button>
+            <p class="text-center mt-2">Don't have an account? <a href="/signup">signup here</a></p>
+        </form>
+    </div>
+</body>
+</html>
